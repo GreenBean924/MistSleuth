@@ -1,0 +1,32 @@
+# 密钥，绝不进镜像
+.env
+.env.*
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+
+# 前端构建产物（镜像内重新构建）与依赖
+node_modules/
+frontend/dist/
+
+# 旧 Streamlit 遗留文件（不参与新架构）
+chroma_db/
+chat_history/
+app_file_uploader.py
+app_qa.py
+config_data.py
+file_history_store.py
+knowledge_base.py
+rag.py
+vector_stores.py
+scripts/
+reports/
+docs/
+md5.txt
+
+# 版本控制 / 编辑器
+.git/
+.gitignore
+*.log

@@ -1,0 +1,21 @@
+# 密钥，绝不提交
+.env
+.env.*
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+
+# Node / 前端构建产物
+node_modules/
+frontend/dist/
+
+# 旧 Streamlit 遗留（已迁移到 backend/ + frontend/，不进仓库）
+rag.py
+vector_stores.py
+scripts/
+reports/
+
+# 日志
+*.log
