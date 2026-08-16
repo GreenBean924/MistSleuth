@@ -1,4 +1,4 @@
-# 迷雾剧场 · AI 剧本杀（单人侦探模式）
+# MistSleuth · 迷雾剧场 AI 剧本杀（单人侦探模式）
 
 单人沉浸式剧本杀：玩家选一个角色，AI 同时担任主持人 + 所有 NPC，搜证、推理、指认、复盘。视角隔离保证游玩阶段不剧透。
 
@@ -21,7 +21,7 @@
 │   │   ├── vector_store.py # Chroma 封装（按 source 过滤）
 │   │   ├── ingestion.py    # 摄取管线
 │   │   └── agent.py        # 游戏状态机 + 视角隔离 Agent
-│   ├── data/               # app.db + chroma/ + scripts/（不提交）
+│   ├── data/               # app.db + chroma/ + scripts/（预摄取，随镜像发布）
 │   ├── ingest.py
 │   └── requirements.txt
 ├── frontend/
