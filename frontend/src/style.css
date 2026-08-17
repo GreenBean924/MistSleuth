@@ -366,3 +366,301 @@ h2 {
     height: 60vh;
   }
 }
+
+/* 底部动作工具栏 */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.tool-btn {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.92rem;
+  transition: border-color 0.2s;
+}
+
+.tool-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.tool-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 动作面板（搜查 / 质问） */
+.action-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border-top: 1px solid var(--border);
+  max-height: 42vh;
+  overflow-y: auto;
+}
+
+.action-panel h4 {
+  margin: 0;
+  color: var(--accent);
+  font-family: Georgia, "Songti SC", serif;
+}
+
+.action-panel input,
+.action-panel select,
+.link-builder select {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 10px 12px;
+  font-size: 0.95rem;
+}
+
+.action-panel input:focus,
+.action-panel select:focus,
+.link-builder select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* 地点分组卡片 */
+.location-group {
+  margin-bottom: 12px;
+}
+
+.location-area {
+  margin: 8px 0 6px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 2px;
+}
+
+.location-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.location-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  padding: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.location-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.location-name {
+  color: var(--accent);
+  font-family: Georgia, "Songti SC", serif;
+}
+
+.location-desc {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* 流式占位：剧本杀 emoji 滚动 */
+.typing-emoji {
+  display: inline-block;
+  letter-spacing: 4px;
+  animation: typing-roll 1.4s ease-in-out infinite;
+}
+
+@keyframes typing-roll {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateX(10px);
+    opacity: 1;
+  }
+}
+
+/* 线索板抽屉 */
+.board-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 50;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.board {
+  width: min(460px, 90vw);
+  height: 100%;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.board-header h3 {
+  margin: 0;
+  color: var(--accent);
+  font-family: Georgia, "Songti SC", serif;
+}
+
+/* 线索卡片 */
+.clue-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.clue-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+
+.clue-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.clue-id {
+  color: var(--accent);
+  font-weight: 600;
+  font-family: Georgia, "Songti SC", serif;
+}
+
+.clue-category {
+  font-size: 0.75rem;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.clue-content {
+  margin: 0 0 10px;
+  font-size: 0.92rem;
+}
+
+.clue-note {
+  width: 100%;
+  min-height: 60px;
+  resize: vertical;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 8px 10px;
+  font-size: 0.88rem;
+  font-family: inherit;
+}
+
+.clue-note:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* 关系连线 */
+.links-section {
+  margin-top: 20px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+.links-section h4 {
+  margin: 0 0 12px;
+  color: var(--accent);
+  font-family: Georgia, "Songti SC", serif;
+}
+
+.link-builder {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.link-builder select {
+  flex: 1;
+  min-width: 90px;
+}
+
+.link-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+}
+
+.link-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blood);
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.link-ends {
+  font-family: Georgia, "Songti SC", serif;
+  color: var(--accent);
+}
+
+.link-relation {
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+.link-relation.conflict {
+  color: #e6a0a0;
+  border-color: var(--blood);
+}
+
+.link-relation.related {
+  color: #8fd6a8;
+  border-color: #3a6b4a;
+}
+
+.link-relation.point {
+  color: #e0c98f;
+  border-color: var(--accent);
+}
+
+.link-remove {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+}

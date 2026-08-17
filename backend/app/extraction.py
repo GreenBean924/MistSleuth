@@ -26,16 +26,20 @@ JSON 结构如下：
   "timeline": [
     {"time": "时间点", "event": "事件描述"}
   ],
-  "truth": {"culprit": "真凶角色名", "method": "作案手法", "motive": "作案动机", "key_evidence": "关键证据"}
+  "truth": {"culprit": "真凶角色名", "method": "作案手法", "motive": "作案动机", "key_evidence": "关键证据"},
+  "locations": [
+    {"name": "场所名", "area": "分区标签", "description": "该场所的简要描述（可空）"}
+  ]
 }
 
 硬性要求：
 1. 所有内容严格来源于原文，不得编造或补充原文没有的信息。
 2. characters 必须覆盖原文中出现的全部嫌疑人角色，secret 与 goal 要写具体。
-3. clues 覆盖原文所有线索卡，category 只能取「个人 / 公共 / 现场 / 尸检」之一。
+3. clues 覆盖原文所有线索卡，category 只能取「个人 / 公共 / 现场 / 尸检」之一。线索编号 id 必须严格采用 C1、C2、C3… 的连续格式，从 C1 开始依次递增。
 4. timeline 按时间顺序排列，覆盖完整案发时间线。
 5. truth 是主持人上帝视角的真相结论。
-6. 只输出 JSON 本身。"""
+6. locations 归纳原文中所有出现、可被搜查或走访的场所（可能散落在故事背景、时间线、线索卡中，无独立地点清单）。area 是该场所的分区标签，用「几楼室内」或「室外」这类短标签，便于前端按区域分组展示。
+7. 只输出 JSON 本身。"""
 
 
 def _extract_json(text: str) -> dict | None:

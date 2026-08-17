@@ -32,6 +32,12 @@ class Truth(BaseModel):
     key_evidence: str
 
 
+class Location(BaseModel):
+    name: str
+    area: str  # 分区标签，如「二楼室内」「一楼室内」「室外」
+    description: str = ""
+
+
 class ScriptStructure(BaseModel):
     title: str
     description: str = ""
@@ -39,3 +45,4 @@ class ScriptStructure(BaseModel):
     clues: list[Clue]
     timeline: list[TimelineEvent]
     truth: Truth
+    locations: list[Location] = []  # 可搜查/出现的场所，旧数据缺省为空

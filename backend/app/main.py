@@ -70,6 +70,10 @@ def script_detail(script_id: int):
             {"name": c.name, "public_identity": c.public_identity}
             for c in s.characters
         ],
+        "locations": [
+            {"name": l.name, "area": l.area, "description": l.description}
+            for l in s.locations
+        ],
     }
 
 
@@ -108,6 +112,14 @@ def game_accuse(req: AccuseRequest):
     if agent is None:
         raise HTTPException(status_code=404, detail="会话不存在")
     return agent.accuse(req.culprit, req.method, req.motive)
+
+
+@app.get("/api/game/{session_id}/clues")
+def game_clues(session_id: str):
+    agent = get_session(session_id)
+    if agent is None:
+        raise HTTPException(status_code=404, detail="会话不存在")
+    return agent.discovered_clues()
 
 
 # ---------- 前端静态托管（生产：单服务） ----------

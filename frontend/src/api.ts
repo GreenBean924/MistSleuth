@@ -12,11 +12,24 @@ export interface CharacterSummary {
   public_identity: string;
 }
 
+export interface Location {
+  name: string;
+  area: string;
+  description: string;
+}
+
 export interface ScriptDetail {
   id: number;
   title: string;
   description: string;
   characters: CharacterSummary[];
+  locations: Location[];
+}
+
+export interface ClueCard {
+  id: string;
+  category: string;
+  content: string;
 }
 
 export interface PlayerView {
@@ -72,6 +85,12 @@ export async function getScript(id: number): Promise<ScriptDetail> {
 
 export function startGame(scriptId: number, character: string): Promise<StartResponse> {
   return post("/game/start", { script_id: scriptId, character });
+}
+
+export async function getClues(sessionId: string): Promise<ClueCard[]> {
+  const resp = await fetch(`${BASE}/game/${sessionId}/clues`);
+  if (!resp.ok) throw new Error("加载线索失败");
+  return resp.json();
 }
 
 export function accuse(

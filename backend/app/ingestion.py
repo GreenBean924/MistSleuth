@@ -60,6 +60,7 @@ def ingest_script(file_path: str, source_name: str | None = None) -> dict:
         result["title"] = structure.title
         result["characters"] = len(structure.characters)
         result["clues"] = len(structure.clues)
+        result["locations"] = len(structure.locations)
     else:
         result["structured"] = False
         result["error"] = "结构化抽取失败，已降级为纯 RAG"

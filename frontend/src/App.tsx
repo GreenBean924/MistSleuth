@@ -64,7 +64,7 @@ export default function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>🕯️ 迷雾剧场</h1>
+        <h1>🕯️ 迷雾侦探</h1>
         <p className="subtitle">单人沉浸式 AI 剧本杀 · 选一个角色，勘破真相</p>
       </header>
 
@@ -107,6 +107,7 @@ export default function App() {
         <GameView
           startResp={startResp}
           characters={detail.characters}
+          locations={detail.locations}
           onAccuse={handleAccuse}
           onQuit={restart}
         />

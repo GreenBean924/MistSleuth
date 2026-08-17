@@ -5,6 +5,7 @@
 - AI 主持控场 + 发线索；玩家点名 NPC 时 AI 以该 NPC 身份回答（秘密被证据戳破才松口）。
 - 复盘阶段才注入 truth + 完整时间线，对照玩家指认逐条点评。
 """
+import re
 import uuid
 
 from langchain_community.chat_models import ChatTongyi
@@ -44,6 +45,7 @@ class GameAgent:
         self.phase = PHASE_PLAYING
         self.history: list[dict] = []
         self.accusation: dict | None = None
+        self.discovered_clue_ids: set[str] = set()
         self._llm = ChatTongyi(model=config.MODEL_NAME, temperature=config.AGENT_TEMPERATURE)
 
     # ---------- 查询 ----------
@@ -55,6 +57,19 @@ class GameAgent:
             "secret": c.secret,
             "goal": c.goal,
         }
+
+    def discovered_clues(self) -> list[dict]:
+        """返回玩家已发现的线索卡片（不含 owner，避免剧透归属）。"""
+        found = []
+        for c in self.structure.clues:
+            if c.id in self.discovered_clue_ids:
+                found.append({"id": c.id, "category": c.category, "content": c.content})
+        return found
+
+    def _record_clue_ids(self, text: str) -> None:
+        """扫描主持人回复中的 [C1] 形式线索编号，登记为已发现。"""
+        for cid in re.findall(r"\[(C\d+)\]", text):
+            self.discovered_clue_ids.add(cid)
 
     def _character(self, name: str) -> Character:
         for c in self.structure.characters:
@@ -131,7 +146,9 @@ class GameAgent:
             if piece:
                 full.append(piece)
                 yield piece
-        self.history.append({"role": "assistant", "content": "".join(full)})
+        reply = "".join(full)
+        self._record_clue_ids(reply)
+        self.history.append({"role": "assistant", "content": reply})
 
     # ---------- 阶段 3：指认 + 复盘 ----------
     def accuse(self, culprit: str, method: str, motive: str) -> dict:
